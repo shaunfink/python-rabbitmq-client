@@ -35,9 +35,11 @@ rabbit_queue_opts = {
     'queue': 'python_ssl'
 }
 
+#rabbit_creds = pika.PlainCredentials(rabbit_opts['user'], rabbit_opts['password'])
+rabbit_creds = pika.credentials.ExternalCredentials()
 parameters = pika.ConnectionParameters(host=rabbit_opts['host'],
                                        port=rabbit_opts['port'],
-                                       credentials=pika.PlainCredentials(rabbit_opts['user'], rabbit_opts['password']),
+                                       credentials=rabbit_creds,
                                        virtual_host=rabbit_opts['virtual_host'],
                                        ssl=True,
                                        ssl_options=ssl_opts)
